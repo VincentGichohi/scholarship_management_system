@@ -7,3 +7,8 @@ ALLOWED_STATUS = [
     ("ACTIVE", "ACTIVE"),
     ("SUSPENDED", "SUSPENDED")
 ]
+
+ALLOWED_GENDER = [
+    ("MALE", "MALE"),
+    ("FEMALE", "FEMALE")
+]
