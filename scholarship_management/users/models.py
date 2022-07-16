@@ -27,4 +27,5 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
     gender = models.CharField(max_length=255, choices=ALLOWED_GENDER)
+    is_admin = models.BooleanField(default=False)
     
