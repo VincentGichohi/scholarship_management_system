@@ -24,7 +24,7 @@ class BaseModel(models.Model):
 class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(max_length=255, unique=True)
-    first_name = models.CharField(max_length=255, blank=False, null=False)
-    last_name = models.CharField(max_length=255, blank=False, null=False)
-    address = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255)
+    gender = models.CharField(max_length=255, choices=ALLOWED_GENDER)
     
