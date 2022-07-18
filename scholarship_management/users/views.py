@@ -21,3 +21,17 @@ class RegistationView(APIView):
         phone = validated_data['phone']
         gender = validated_data['gender']
         password = validated_data['password']
+        name = validated_data['name']
+
+        user = user_models.User.objects.create(
+            username=email,
+            phone=phone,
+            gender=gender,
+            name=name
+        )
+        user.set_password(password)
+        user.save()
+
+        klass.create_application_user(user)  #create application user
+
+        return Response({"details": "Employee created successfully"}, status=status.HTTP_200_OK)
