@@ -27,7 +27,7 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
     gender = models.CharField(max_length=255, choices=ALLOWED_GENDER)
-    email = models.EmailField(blank=False, null=False)
+    email = models.EmailField(unique=True, blank=False, null=False)
     is_admin = models.BooleanField(default=False)
     status = models.CharField(max_length=255, choices=ALLOWED_STATUS, default="ACTIVE")
     is_phone_verified = models.BooleanField(default=False)
