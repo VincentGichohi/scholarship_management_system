@@ -15,3 +15,9 @@ class RegistationView(APIView):
 
         if not serializer.is_valid():
             return Response({'details': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+        validated_data = serializer.validated_data
+        email = validated_data['email']
+        phone = validated_data['phone']
+        gender = validated_data['gender']
+        password = validated_data['password']
