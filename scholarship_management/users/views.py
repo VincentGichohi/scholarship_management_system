@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate
 from oauth2_provider.models import get_application_model
 from users.utils import oauth2_users
 from rest_framework import status
+
 klass = oauth2_users.ApplicationUser()
 
 class RegistationView(APIView):
