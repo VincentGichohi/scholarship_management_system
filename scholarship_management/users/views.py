@@ -1,3 +1,4 @@
+from webbrowser import get
 from django.shortcuts import render
 from requests import Response
 from rest_framework.views import APIView
@@ -41,4 +42,34 @@ class RegistationView(APIView):
 class LoginAPIView(APIView):
     
     def post(self, request):
-        serializer = user_serializers.LoginSerializer()
+        serializer = user_serializers.LoginSerializer(data=request.data, many=False)
+
+        if not serializer.is_valid():
+            return Response({"details": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+        validated_data = serializer.validated_data
+        email = validated_data['email']
+        password = validated_data['password']
+
+        user = authenticate(emil=email, password=password)
+
+        if not user:
+            return Response({'details': "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if user.status != "ACTIVE":
+            return Response({'details': 'User is {}'.format(user.status.lower())}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            instance = get_application_model().objects.get(user=user)
+        except get_application_model().DoesNotExist:
+            return Response({'details': "Invalid Client"}, status=status.HTTP_400_BAD_REQUEST)
+
+        dt = {
+            "grant_type": "password",
+            "username": "username",
+            "password": "password",
+            "client_id": instance.client_id,
+            "client_secret": instance.client_secret
+        }
+
+
