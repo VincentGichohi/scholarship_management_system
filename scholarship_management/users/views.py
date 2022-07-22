@@ -73,3 +73,15 @@ class LoginAPIView(APIView):
         }
 
 
+        resp = klass.get_client_details(dt)
+
+        if not resp:
+            return Response({'details': "Invalid Client credentials"}, status=status.HTTP_400_BAD_REQUEST)
+
+        userInfo = {
+            "access_token": resp['access_token'],
+            "expires_in": resp["expires_in"],
+            "token_type": resp["token_type"],
+            "refresh_token": ["refresh_token"],
+            "jwt_token": klass.generate_jwt_token(user)
+        }
