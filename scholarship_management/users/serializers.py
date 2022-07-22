@@ -35,3 +35,4 @@ class RegistrationSerializer(serializers.Serializer):
 
         return obj
         
+
