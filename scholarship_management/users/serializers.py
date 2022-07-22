@@ -36,7 +36,7 @@ class RegistrationSerializer(serializers.Serializer):
         return obj
         
 
-class LoginSerializer(serializers.Serializer);
+class LoginSerializer(serializers.Serializer)
 email = serializers.CharField(required=True, trim_whitespace=True)
 password = serializers.CharField(required=True, trim_whitespace=True)
 
