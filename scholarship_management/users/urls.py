@@ -10,3 +10,5 @@ urlpatterns = [
     path("registration", views.RegistationView.as_view()),
 ]
 
+
+urlpatterns += router.urls
