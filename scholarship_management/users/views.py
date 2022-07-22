@@ -35,4 +35,10 @@ class RegistationView(APIView):
 
         klass.create_application_user(user)  #create application user
 
-        return Response({"details": "Employee created successfully"}, status=status.HTTP_200_OK)
+        return Response({"details": "User created successfully"}, status=status.HTTP_200_OK)
+
+    
+class LoginAPIView(APIView):
+    
+    def post(self, request):
+        serializer = user_serializers.LoginSerializer()
